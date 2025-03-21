@@ -27,8 +27,9 @@ namespace Sigil
             {
                 var transitions =
                     new[] {
-                        new StackTransition(new [] { field.DeclaringType }, new [] { field.FieldType.MakeByRefType() })
-                    };
+                        new StackTransition(new [] { field.DeclaringType }, new [] { field.FieldType.MakeByRefType() }),
+						new StackTransition(new [] { field.DeclaringType.MakePointerType() }, new [] { field.FieldType.MakeByRefType() })
+					};
 
                 UpdateState(OpCodes.Ldflda, field, Wrap(transitions, "LoadFieldAddress"));
             }
